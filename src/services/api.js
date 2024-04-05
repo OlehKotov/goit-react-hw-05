@@ -11,8 +11,8 @@ Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMjZjMTA5ZjUxNjA1N2JkYTYy
 
 
 export const requestTrendingMovies = async() => {
-    const responce = await axios.get(url, options);
-    return responce.data
+    const { data} = await axios.get(url, options);
+    return data.results
 }
 
 
