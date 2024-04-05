@@ -4,6 +4,7 @@ import HomePage from "../../pages/HomePage/HomePage";
 import MovieList from "../MovieList/MovieList";
 
 import css from "./Navigation.module.css";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 const Navigation = () => {
   const buildLinkClass = ({ isActive }) => {
@@ -25,6 +26,7 @@ const Navigation = () => {
         <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MovieList />} />
+        <Route path="*" element={<NotFoundPage/>} />
         </Routes>
       </main>
     </div>
