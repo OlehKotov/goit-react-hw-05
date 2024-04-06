@@ -15,8 +15,20 @@ export const requestTrendingMovies = async() => {
     return data.results
 }
 
+export const requestMovieDetailsById = async(movieId) => {
+    const { data} = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options);
+    return data
+}
+
+export const requestMovieCastById = async(movieId) => {
+    const { data} = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`, options);
+    return data.cast
+}
+
+export const requestMovieReviewById = async(movieId) => {
+    const { data} = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`, options);
+    return data.cast
+}
 
 
-// axios.get(url, options)
-// .then(response => console.log(response))
-// .catch(err => console.error(err));
+
