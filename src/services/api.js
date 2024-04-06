@@ -27,7 +27,7 @@ export const requestMovieCastById = async(movieId) => {
 
 export const requestMovieReviewById = async(movieId) => {
     const { data} = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`, options);
-    return data.cast
+    return data.results
 }
 
 

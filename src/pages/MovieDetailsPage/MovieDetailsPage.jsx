@@ -20,12 +20,20 @@ const MovieDetailsPage = () => {
     fetchMovieDetails();
   }, [movieId]);
 
+  const defaultImg =
+    "<https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg>";
+
   return (
     <div>
       <img
-        src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
-        alt=""
-      ></img>
+        src={
+          movieDetails.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
+            : defaultImg
+        }
+        width={250}
+        alt="poster"
+      />
       <h1>{movieDetails.original_title}</h1>
       <p>Users score: {Math.floor(movieDetails.popularity)}%</p>
       <h2>Overview</h2>
@@ -35,7 +43,7 @@ const MovieDetailsPage = () => {
       {movieDetails.genres &&
         movieDetails.genres.map((genre) => <p key={genre.id}>{genre.name}</p>)}
       <h3>Additional Information</h3>
-<ul>
+      <ul>
         <li>
           <Link to="cast">Cast</Link>
         </li>
