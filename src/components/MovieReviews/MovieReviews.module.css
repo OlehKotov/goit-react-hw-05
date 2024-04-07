@@ -1,0 +1,12 @@
+.reviewText {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.reviewContent {
+    margin-top: 7px;
+    margin-left: 20px;
+    max-width: 1000px;
+}
+.reviewTextSpan {
+    font-weight: 700;
+}

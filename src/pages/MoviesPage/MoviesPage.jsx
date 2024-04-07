@@ -1,6 +1,7 @@
 
 import MovieList from "../../components/MovieList/MovieList";
 import { useSearchParams } from "react-router-dom";
+import css from "./MoviesPage.module.css"
 
 
 
@@ -26,7 +27,7 @@ const MoviesPage = () => {
 
   return (
     <div >
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={css.searchForm}>
       <input
         type="text"
         name="searchMovie"

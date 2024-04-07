@@ -4,6 +4,9 @@ nav {
   gap: 15px;
   margin-left: 15px;
   border-bottom: 1.5px solid black;
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .link {
   display: flex;
