@@ -3,7 +3,11 @@ import MovieList from "../../components/MovieList/MovieList";
 function HomePage() {
 
   return (
-    <MovieList />
+    <div>
+      <h2>Trending today</h2>
+      <MovieList isSearchPage={false}/>
+    </div>
+    
   )
 }
 

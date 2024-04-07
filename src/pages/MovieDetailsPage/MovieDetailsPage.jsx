@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Route, Routes, Link, useParams } from "react-router-dom";
 import { requestMovieDetailsById } from "../../services/api";
 import MovieCast from "../../components/MovieCast/MovieCast";
@@ -7,6 +8,8 @@ import MovieReviews from "../../components/MovieReviews/MovieReviews";
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState([]);
+  const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     async function fetchMovieDetails() {

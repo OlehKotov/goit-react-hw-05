@@ -1,45 +1,74 @@
 import { useEffect, useState } from "react";
-import { requestTrendingMovies } from "../../services/api";
+import {
+  requestMovieBySearch,
+  requestTrendingMovies,
+} from "../../services/api";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const MovieList = ({isSearchPage = false}) => {
+const MovieList = ({ isSearchPage, query }) => {
+  const [movies, setMovies] = useState([]);
+  const location = useLocation();
   
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [query, setQuery] = useState('');
-
-
 
   useEffect(() => {
-    if(isSearchPage) return
+    if (isSearchPage) return;
     async function fetchTrendingMovies() {
       try {
         const data = await requestTrendingMovies();
-        setTrendingMovies(data);
+        setMovies(data);
       } catch (error) {
         console.log(error);
-      } 
+      }
     }
 
     fetchTrendingMovies();
-
   }, [isSearchPage]);
 
+  useEffect(() => {
+    if (!query) return;
+    async function fetchSearchMovies() {
+      try {
+        const data = await requestMovieBySearch(query);
+        setMovies(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
- 
+    fetchSearchMovies();
+  }, [query]);
 
+  useEffect(() => {
+    if (!isSearchPage) {
+      async function fetchTrendingMovies() {
+        try {
+          const data = await requestTrendingMovies();
+          setMovies(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      fetchTrendingMovies();
+    }
+  }, [isSearchPage]);
 
   return (
     <div>
-      <h2>Trending today</h2>
+      {location.pathname === '/' && <h2>Home</h2>}
+      {location.pathname === '/movies' && <h2>Movies</h2>}
       <ul>
-      {trendingMovies.map(movies => {
-        return <li key={movies.id}>
-          <Link to={`/movies/${movies.id}>`}>{movies.title}</Link>
-        </li>
-      })}
-    </ul>
+        {movies.map((movies) => {
+          return (
+            <li key={movies.id}>
+              <Link to={`/movies/${movies.id}>`}>{movies.title}</Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
-  )
-}
+  );
+};
 
-export default MovieList
+export default MovieList;
