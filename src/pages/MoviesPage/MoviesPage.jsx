@@ -1,20 +1,12 @@
-
 import MovieList from "../../components/MovieList/MovieList";
-import { useSearchParams } from "react-router-dom";
-import css from "./MoviesPage.module.css"
-
-
+import css from "./MoviesPage.module.css";
+import Loader from "../../components/Loader/Loader";
+import { useMovies } from "../../Hooks/useMovies";
 
 const MoviesPage = () => {
-  
-  
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("query")
-
-  const onSetSearchQuery = (value) => {
-    setSearchParams({query: value});
-  };
-  
+  const { movies, isLoading, onSetSearchQuery } = useMovies({
+    isSearchPage: true,
+  });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -24,22 +16,22 @@ const MoviesPage = () => {
     form.reset();
   };
 
-
   return (
-    <div >
-    <form onSubmit={handleSubmit} className={css.searchForm}>
-      <input
-        type="text"
-        name="searchMovie"
-        autoComplete="off"
-        autoFocus
-        placeholder="Search movies"
-      />
-      <button type="submit">Search</button>
-    </form>
-    <MovieList isSearchPage={true} query={query}/>
-  </div>
-  )
-}
+    <div>
+      <form onSubmit={handleSubmit} className={css.searchForm}>
+        <input
+          type="text"
+          name="searchMovie"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search movies"
+        />
+        <button type="submit">Search</button>
+      </form>
+      {isLoading && <Loader />}
+      <MovieList movies={movies} />
+    </div>
+  );
+};
 
-export default MoviesPage
+export default MoviesPage;

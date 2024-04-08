@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import css from "./NotFoundPage.module.css"
 
 const NotFoundPage = () => {
   const [timer, setTimer] = useState(0);
@@ -15,12 +16,12 @@ const NotFoundPage = () => {
     return <Navigate to="/" replace />;
   }
   return (
-    <div>
+    <div className={css.notFoundWrap}>
       <h1>404</h1>
       <h2>Not found</h2>
       <p>The resource requested could not be found on this server!</p>
-      <p>You will be redirected to Home in {5 - timer}</p>
-      <Link to="/">Go Home</Link>
+      <p>You will be redirected to Home in <span>{5 - timer}</span> </p>
+      <Link className={css.goBack} to="/">Go Home</Link>
     </div>
   );
 };
